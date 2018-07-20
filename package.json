@@ -10,7 +10,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "toposort": "github:marcelklehr/toposort",
-    "listenable": "github:kacao/listenable"
+    "listenable": "github:kacao/listenable",
+    "toposort": "github:marcelklehr/toposort"
   }
 }

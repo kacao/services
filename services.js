@@ -25,7 +25,8 @@ exports = module.exports = class Services {
         });
       }
       service.__runService = f.bind(service);
-      service.getService = (id) => { return self.service(id); }
+      f = (id) => { return self.service(id); }
+      service.getService = f.bind(service);
     }
   }
 
@@ -56,7 +57,7 @@ exports = module.exports = class Services {
   }
   
   service(id) {
-    return this._services(id);
+    return this._services[id];
   }
 
   _sort(services) {

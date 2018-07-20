@@ -26,18 +26,21 @@ describe('Services', () => {
     ['db'],
     ['settings'],
     ['back', 'front']
+
   ];
   it('should return correct orders of services', (done) => {
     let list = services._sort(services._services);
     list.should.eql(expected);
     done();
   });
+
   it('should run with a correct order', (done) => {
     services.run().then((results) => {
       results.should.eql(expected);
       done();
     }); 
   });
+
   it('should fail when adding non-existing dep', async () => {
     let services = new Services();
     services.add([
@@ -45,5 +48,24 @@ describe('Services', () => {
     ]);
     let results = await services.run();
     results.should.be.an.instanceOf(Error);
+  });
+
+  it('#getService()', async () => {
+
+    class Front extends Service {
+      async run(ready, fail) {
+        let back = this.getService('back');
+        should.exist(back);
+        ready();
+      };
+    }
+
+    let services = new Services();
+    services.add([
+      new Service('back', [])
+    ]);
+    let front = new Front('front', ['back']);
+    services.add(front);
+    let results = await services.run();
   });
 });
