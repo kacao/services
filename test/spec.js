@@ -8,8 +8,8 @@ describe('Services', () => {
   services.add([
     new Service('config', []),
     new Service('settings', ['config', 'db']),
-    new Service('back', ['config', 'db', 'settings']),
-    new Service('front', ['config', 'db', 'settings'])
+    new Service('back', ['settings']),
+    new Service('front', ['settings'])
   ]);
 
   let db = new Service('db', ['config']);
