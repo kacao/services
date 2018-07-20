@@ -10,7 +10,7 @@ npm install kacao/services
 Usage
 ------
 
-This creates 5 services: `config`, `db`, `settings`, `backend` and `frontend`, call run() will load services in this order (services will wait for dependencies to be ready before starting to run): 
+This creates 5 services: `config`, `db`, `settings`, `backend` and `frontend`, calling `run()` will load services in this order (services will wait for dependencies to be ready before starting to run): 
 - `config`
 - `db`
 - `settings`
@@ -40,12 +40,12 @@ let db = new Service('db', ['config']);
 services.add(db);
 
 db.run = async (ready, fail) => {
-     console.log('db service init');
-    // sleep for 3s then set to ready
-    (new Promise(resolve => setTimeout(resolve, 3000))).then( () => {
-      console.log('db ready');
-      ready();
-    });
+  console.log('db service init');
+  // sleep for 3s then set to ready
+  (new Promise(resolve => setTimeout(resolve, 3000))).then( () => {
+    console.log('db ready');
+    ready();
+  });
 }
 ```
 
