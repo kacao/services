@@ -20,7 +20,8 @@ exports = module.exports = class Services {
       services = [services];
     }
     for (let i=0; i<services.length; i++) {
-      this._addService(services[i], this._services);
+      this._addService(this._services, services[i]);
+
     }
   }
 
@@ -39,10 +40,10 @@ exports = module.exports = class Services {
       throw "Service should be subclass of Service";
     }
     services[service.id] = service;
-   
+    let self = this; 
     let f = () => {
       return new Promise( async (resolve, reject) => {
-        let context = new Context(() => { resolve(service.id) }, () => { reject(false) }, services);
+        let context = new Context(() => { resolve(service.id) }, () => { reject(false) }, self);
         await service.run.call(service, context);
       });
     }
@@ -84,8 +85,6 @@ exports = module.exports = class Services {
     for (let i in services) {
       let service = services[i];
       let deps = service._deps;
-      console.log('eps');
-      console.log(service);
       for (let j=0; j<deps.length; j++) {
         if (!services.hasOwnProperty(deps[j])) {
           return new Error("Service not found: " + deps[j]);
