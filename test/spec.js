@@ -13,10 +13,10 @@ describe('Services', () => {
   ]);
 
   let db = new Service('db', ['config']);
-  db.run = async (ready, fail) => {
+  db.run = async (cxt) => {
     // sleep 1s
     (new Promise(resolve => setTimeout(resolve, 1000))).then( () => {
-      ready();
+      cxt.ready();
     });
   }
   services.add(db);
@@ -28,6 +28,7 @@ describe('Services', () => {
     ['back', 'front']
 
   ];
+
   it('should return correct orders of services', (done) => {
     let list = services._sort(services._services);
     list.should.eql(expected);
@@ -53,8 +54,8 @@ describe('Services', () => {
   it('#getService()', async () => {
 
     class Front extends Service {
-      async run(ready, fail) {
-        let back = this.getService('back');
+      async run(cxt) {
+        let back = cxt.getService('back');
         should.exist(back);
         ready();
       };

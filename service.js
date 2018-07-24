@@ -10,8 +10,8 @@ exports = module.exports = class Service extends Listenable {
     this._deps = [].concat(deps);
   }
 
-  async run(ready, fail) {
-    ready();
+  async run(cxt) {
+    cxt.ready();
   }
 
   get deps() {

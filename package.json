@@ -6,11 +6,12 @@
     "should": "^13.2.1"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --recursive"
   },
   "main": "index.js",
   "dependencies": {
     "listenable": "github:kacao/listenable",
-    "toposort": "github:marcelklehr/toposort"
+    "toposort": "github:marcelklehr/toposort",
+    "uuid-random": "^1.0.6"
   }
 }
