@@ -52,12 +52,11 @@ describe('Services', () => {
   });
 
   it('#getService()', async () => {
-
     class Front extends Service {
-      async run(cxt) {
-        let back = cxt.getService('back');
+      async run(ctx) {
+        let back = ctx.getService('back');
         should.exist(back);
-        ready();
+        ctx.ready();
       };
     }
 
