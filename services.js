@@ -1,4 +1,3 @@
-const Listenable = require('listenable');
 const Service = require('./service');
 const Context = require('./context');
 const sort = require('toposort');
